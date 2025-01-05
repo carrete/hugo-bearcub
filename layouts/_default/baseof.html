@@ -2,7 +2,6 @@
 <html lang="{{ with .Site.LanguageCode }}{{ . }}{{ else }}en-US{{ end }}">
 
 <head>
-  <meta http-equiv="X-Clacks-Overhead" content="GNU Terry Pratchett" />
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   {{- partial "favicon.html" . -}}
@@ -42,6 +41,10 @@
     {{- block "main" . }}{{- end }}
   </main>
   <footer>
+    {{ $customFooter := (printf "partials/custom_footer.%s.html" .Site.LanguageCode) }}
+    {{ if templates.Exists $customFooter }}
+    {{ partial $customFooter . }}
+    {{ end }}
     {{- partial "footer.html" . -}}
   </footer>
 
